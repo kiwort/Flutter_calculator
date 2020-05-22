@@ -8,7 +8,7 @@ class BillSplitter extends StatefulWidget {
 
 class _BillSplitterState extends State<BillSplitter> {
 
-  int _tip = 0;
+  int _tipPercentage = 0;
   int _personCounter = 1;
   double _billAmount = 0.0;
 
@@ -35,8 +35,19 @@ class _BillSplitterState extends State<BillSplitter> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Total Per Person"),
-                    Text("\$100")
+                    Text("Total Per Person",style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("\$100",style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30.0,
+                        color: Colors.white,
+                      ),),
+                    )
                   ],
                 ),
               ),
@@ -155,6 +166,23 @@ class _BillSplitterState extends State<BillSplitter> {
                           fontSize: 20.0,
                         ),),
                       ),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text("$_tipPercentage%",style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                      Slider(
+                          min : 0,
+                          max : 100,
+                          value: _tipPercentage.toDouble(), onChanged: (double value){
+                        setState(() {
+                          _tipPercentage = value.round();
+                        });
+                      }),
                     ],
                   )
                 ],
