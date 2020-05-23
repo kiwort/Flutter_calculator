@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BillSplitter extends StatefulWidget {
@@ -42,7 +41,7 @@ class _BillSplitterState extends State<BillSplitter> {
                     ),),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("\$100",style: TextStyle(
+                      child: Text("\$ ${calculateTotalPerPerson(_billAmount, _personCounter,_tipPercentage)}",style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30.0,
                         color: Colors.white,
@@ -160,7 +159,7 @@ class _BillSplitterState extends State<BillSplitter> {
                       ),),
                       Padding(
                         padding: const EdgeInsets.all(18.0),
-                        child: Text("\$35",style: TextStyle(
+                        child: Text("\$ ${calculateTotalTip(_billAmount, _personCounter,_tipPercentage)}",style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
@@ -193,5 +192,20 @@ class _BillSplitterState extends State<BillSplitter> {
         ),
       ),
     );
+  }
+  calculateTotalPerPerson( double billAmount, int splitBy, int tipPercentage){
+    var totalPerPerson = (calculateTotalTip(billAmount, splitBy, tipPercentage) + billAmount) / splitBy;
+    return totalPerPerson.toStringAsFixed(2);
+  }
+  calculateTotalTip(double billAmount, int splitBy, int tipPercentage){
+    double totalTip = 0.0;
+
+    if(billAmount < 0 || billAmount.toString().isEmpty || billAmount == null){
+
+    }else{
+      totalTip = (billAmount * tipPercentage) / 100;
+
+    }
+    return totalTip;
   }
 }
